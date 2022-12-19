@@ -20,6 +20,10 @@ const SignupPage = () => {
           <div id="float-label">
             <input type="password" />
             <label htmlFor="email">Password</label>
+            <img
+              src="client\Laundry-Cart-FrontEnd\client\public\icons\padlock.svg"
+              alt=""
+            />
           </div>
           <p className="section2_forget">forget password ?</p>
         </form>
