@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "./RegisterPage.css";
-import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [data, setData] = useState({
@@ -43,29 +41,26 @@ const RegisterPage = () => {
     console.log(errorMsg, passErrorMsg);
   };
   return (
-    <div className="container">
-      <section className="section-1">
-        <h1 className="section1_title">Laundry Service</h1>
-        <h4 className="section1_para">Doorstep Wash & Dryclean Service</h4>
-        <p className="section1_para1">Don't Have An Account?</p>
-        <button onClick={() => navigate("/register")} className="section1_btn">
-          Resigter
-        </button>
+    <div className="container1">
+      <section className="register_text">
+        <h1 className="register_title">Laundry Service</h1>
+        <h4 className="register_para">Doorstep Wash & Dryclean Service</h4>
+        <p className="section1_para11">Don't Have An Account?</p>
+        <button className="section1_btn1">Sign In</button>
       </section>
-      <section className="section-2">
-        <h1 className="section2_title">SIGN IN</h1>
-        <form className="section2_form" onSubmit={submitHandler}>
-          <div id="float-label">
+      <section className="register-2">
+        <h1 className="register2_title">REGISTER</h1>
+        <form className="register2_form" onSubmit={submitHandler}>
+          <div className="float-label1">
             <input
               type="text"
-              onBlur={blurHandler}
-              onChange={emailChangeHandler}
               required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
             />
             <label htmlFor="email">Name</label>
-            <p className="section2_error_message">{errorMsg}</p>
           </div>
-          <div id="float-label">
+          <div className="float-label1">
             <input
               type="email"
               required
@@ -73,14 +68,44 @@ const RegisterPage = () => {
               onChange={passChangeHandler}
             />
             <label htmlFor="email">Email</label>
-            <img
-              src="client\Laundry-Cart-FrontEnd\client\public\icons\padlock.svg"
-              alt=""
-            />
           </div>
-          <p className="section2_error_message">{passErrorMsg}</p>
-          <p className="section2_forget">forget password ?</p>
-          <div id="float-label">
+          <div className="float-label1">
+            <input
+              type="number"
+              required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
+            />
+            <label htmlFor="email">Phone</label>
+          </div>
+          <div className="float-label1">
+            <input
+              type="text"
+              required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
+            />
+            <label htmlFor="email">State</label>
+          </div>
+          <div className="float-label1">
+            <input
+              type="text"
+              required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
+            />
+            <label htmlFor="email">District</label>
+          </div>
+          <div className="float-label1">
+            <input
+              type="text"
+              required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
+            />
+            <label htmlFor="email">Address</label>
+          </div>
+          <div className="float-label1">
             <input
               type="password"
               required
@@ -88,12 +113,22 @@ const RegisterPage = () => {
               onChange={passChangeHandler}
             />
             <label htmlFor="email">Password</label>
-            <img
-              src="client\Laundry-Cart-FrontEnd\client\public\icons\padlock.svg"
-              alt=""
-            />
           </div>
-          <button className="section2_btn">Sign In</button>
+          <div className="float-label1">
+            <input
+              type="number"
+              required
+              onBlur={blurHandler}
+              onChange={passChangeHandler}
+            />
+            <label htmlFor="email">Pincode</label>
+          </div>
+          <input type="checkbox" className="terms_conditions" id="terms" />
+          <label htmlFor="terms" className="conditions">
+            I agree to Terms & Condition receiving marketing and promotional
+            materials
+          </label>
+          <button className="section2_btn1">Register</button>
         </form>
       </section>
     </div>
