@@ -28,7 +28,7 @@
 }
 #float-label label {
   position: absolute;
-  transform: translate(0, 26px) scale(1);
+  transform: translate(0, 12px) scale(1);
 }
 #float-label label {
   transform-origin: top left;

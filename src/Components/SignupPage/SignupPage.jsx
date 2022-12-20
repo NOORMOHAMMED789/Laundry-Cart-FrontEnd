@@ -39,8 +39,10 @@ const SignupPage = () => {
     }
   };
 
-  const submitHandler = () => {
-    console.log(errorMsg, passErrorMsg);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const { email, password } = data;
+    console.log({ email: email, password: password });
   };
   return (
     <div className="container">
@@ -57,7 +59,7 @@ const SignupPage = () => {
         <form className="section2_form" onSubmit={submitHandler}>
           <div id="float-label">
             <input
-              type="email || number"
+              type="text"
               onBlur={blurHandler}
               onChange={emailChangeHandler}
               required

@@ -10,10 +10,15 @@ const RegisterPage = () => {
   const [addressErrorMsg, setAddressErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [pinErrorMsg, setPinErrorMsg] = useState("");
-
-  const [data, setData] = useState({
-    email: "",
-    password: "",
+  const [userData, setUserData] = useState({
+    Name: "",
+    Email: "",
+    PhoneNumber: "",
+    State: "",
+    District: "",
+    Address: "",
+    Password: "",
+    pincode: "",
   });
 
   //! Handles the blur event when you out focus it.
@@ -28,6 +33,7 @@ const RegisterPage = () => {
   };
   //! Handles the name error message.
   const nameChangeHandler = (e) => {
+    setUserData({ ...userData, Name: e.target.value });
     if (e.target.value === "") {
       setNameErrorMsg("Name can't be Empty");
     } else {
@@ -37,7 +43,7 @@ const RegisterPage = () => {
 
   //! Handles the email field error message
   const emailChangeHandler = (e) => {
-    setData({ ...data, email: e.target.value });
+    setUserData({ ...userData, Email: e.target.value });
     if (
       !e.target.value.match(
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -51,6 +57,7 @@ const RegisterPage = () => {
 
   //! Handles the phone field error message
   const phoneChangeHandler = (e) => {
+    setUserData({ ...userData, PhoneNumber: e.target.value });
     if (e.target.value.length > 10) {
       setPhoneErrorMsg("Phone number must contains 10 digits");
     } else {
@@ -60,6 +67,7 @@ const RegisterPage = () => {
 
   //! Handles the state field error message
   const stateChangeHandler = (e) => {
+    setUserData({ ...userData, State: e.target.value });
     if (e.target.value === "" || e.target.value > 4) {
       setStateErrorMsg("State name is Invalid");
     } else {
@@ -69,6 +77,7 @@ const RegisterPage = () => {
 
   //! Handles the dist field error message
   const distChangeHandler = (e) => {
+    setUserData({ ...userData, District: e.target.value });
     if (e.target.value === "") {
       setDistErrorMsg("District name is Invalid");
     } else {
@@ -78,6 +87,7 @@ const RegisterPage = () => {
 
   //! Handles the address field error message
   const addressChangeHandler = (e) => {
+    setUserData({ ...userData, Address: e.target.value });
     if (e.target.value === "") {
       setAddressErrorMsg("Enter Valid Address");
     } else {
@@ -87,7 +97,7 @@ const RegisterPage = () => {
 
   //! Handles the password field error message
   const passChangeHandler = (e) => {
-    setData({ ...data, password: e.target.value });
+    setUserData({ ...userData, Password: e.target.value });
     if (e.target.value.match(/[^a-zA-Z0-9]/) || e.target.value.length < 6) {
       setPassErrorMsg("Must be atleast 6 characters");
     } else {
@@ -95,7 +105,9 @@ const RegisterPage = () => {
     }
   };
 
+  //! Handles the pincode field error message
   const pinChangeHandler = (e) => {
+    setUserData({ ...userData, pincode: e.target.value });
     if (e.target.value.length > 6) {
       setPinErrorMsg("Must contains 6 digits");
     } else {
@@ -103,7 +115,29 @@ const RegisterPage = () => {
     }
   };
 
-  const submitHandler = () => {};
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const {
+      Name,
+      Email,
+      PhoneNumber,
+      State,
+      District,
+      Address,
+      Password,
+      pincode,
+    } = userData;
+    console.log({
+      Name: Name,
+      Email: Email,
+      PhoneNumber: PhoneNumber,
+      State: State,
+      District: District,
+      Address: Address,
+      Password: Password,
+      pincode: pincode,
+    });
+  };
   return (
     <div className="container1">
       <section className="register_text">
