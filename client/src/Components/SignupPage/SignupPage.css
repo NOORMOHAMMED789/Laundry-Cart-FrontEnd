@@ -168,3 +168,9 @@
   box-shadow: 6px 6px 5px black;
   transform: scale(1.01);
 }
+
+.section2_error_message {
+  margin-left: 210px;
+  color: red;
+  font-size: 13px;
+}
