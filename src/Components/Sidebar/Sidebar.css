@@ -1,0 +1,49 @@
+.side-bar {
+    background-color: #5861ae;
+    height: 90vh;
+    float: left;
+    width: 4vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 4vh;
+}
+
+.icon-block {
+    cursor: pointer;
+    width: 100%;
+}
+
+.icon-block:hover {
+    background-color: white;
+}
+
+.option {
+    height: 5vw;
+}
+
+#home {
+    background: transparent url('./icons/home.svg') no-repeat center;
+}
+
+#home:hover {
+    background: transparent url('./icons/home-hl.svg') no-repeat center;
+}
+
+#more {
+    background: transparent url('./icons/more.svg') no-repeat center;
+}
+
+#more:hover {
+    background: transparent url('./icons/more-hl.svg') no-repeat center;
+}
+
+#list {
+    background: transparent url('./icons/list.svg') no-repeat center;
+}
+
+#list:hover {
+    background: transparent url('./icons/list-hl.svg') no-repeat center;
+}
