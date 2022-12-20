@@ -187,3 +187,8 @@
   border-radius: 4px;
   opacity: 1;
 }
+
+.error_msg {
+  color: red;
+  font-size: 12px;
+}

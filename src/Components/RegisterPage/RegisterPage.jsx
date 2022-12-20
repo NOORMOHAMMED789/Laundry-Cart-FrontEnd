@@ -2,19 +2,40 @@ import React, { useState } from "react";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
-  const [errorMsg, setErrorMsg] = useState("");
+  const [nameErrorMsg, setNameErrorMsg] = useState("");
+  const [emailErrorMsg, setEmailErrorMsg] = useState("");
+  const [phoneErrorMsg, setPhoneErrorMsg] = useState("");
+  const [stateErrorMsg, setStateErrorMsg] = useState("");
+  const [distErrorMsg, setDistErrorMsg] = useState("");
+  const [addressErrorMsg, setAddressErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
+  const [pinErrorMsg, setPinErrorMsg] = useState("");
+
   const [data, setData] = useState({
     email: "",
     password: "",
   });
 
-  // const data = useRef();
+  //! Handles the blur event when you out focus it.
   const blurHandler = () => {
-    setErrorMsg("");
+    setNameErrorMsg("");
+    setEmailErrorMsg("");
+    setPhoneErrorMsg("");
+    setStateErrorMsg("");
+    setDistErrorMsg("");
     setPassErrorMsg("");
+    setPinErrorMsg("");
+  };
+  //! Handles the name error message.
+  const nameChangeHandler = (e) => {
+    if (e.target.value === "") {
+      setNameErrorMsg("Name can't be Empty");
+    } else {
+      setNameErrorMsg("");
+    }
   };
 
+  //! Handles the email field error message
   const emailChangeHandler = (e) => {
     setData({ ...data, email: e.target.value });
     if (
@@ -22,12 +43,49 @@ const RegisterPage = () => {
         /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
     ) {
-      setErrorMsg("please enter a valid Email");
+      setEmailErrorMsg("please enter a valid Email");
     } else {
-      setErrorMsg("");
+      setEmailErrorMsg("");
     }
   };
 
+  //! Handles the phone field error message
+  const phoneChangeHandler = (e) => {
+    if (e.target.value.length > 10) {
+      setPhoneErrorMsg("Phone number must contains 10 digits");
+    } else {
+      setPhoneErrorMsg("");
+    }
+  };
+
+  //! Handles the state field error message
+  const stateChangeHandler = (e) => {
+    if (e.target.value === "" || e.target.value > 4) {
+      setStateErrorMsg("State name is Invalid");
+    } else {
+      setStateErrorMsg("");
+    }
+  };
+
+  //! Handles the dist field error message
+  const distChangeHandler = (e) => {
+    if (e.target.value === "") {
+      setDistErrorMsg("District name is Invalid");
+    } else {
+      setDistErrorMsg("");
+    }
+  };
+
+  //! Handles the address field error message
+  const addressChangeHandler = (e) => {
+    if (e.target.value === "") {
+      setAddressErrorMsg("Enter Valid Address");
+    } else {
+      setAddressErrorMsg("");
+    }
+  };
+
+  //! Handles the password field error message
   const passChangeHandler = (e) => {
     setData({ ...data, password: e.target.value });
     if (e.target.value.match(/[^a-zA-Z0-9]/) || e.target.value.length < 6) {
@@ -37,9 +95,15 @@ const RegisterPage = () => {
     }
   };
 
-  const submitHandler = () => {
-    console.log(errorMsg, passErrorMsg);
+  const pinChangeHandler = (e) => {
+    if (e.target.value.length > 6) {
+      setPinErrorMsg("Must contains 6 digits");
+    } else {
+      setPinErrorMsg("");
+    }
   };
+
+  const submitHandler = () => {};
   return (
     <div className="container1">
       <section className="register_text">
@@ -56,54 +120,60 @@ const RegisterPage = () => {
               type="text"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={nameChangeHandler}
             />
             <label htmlFor="email">Name</label>
+            <p className="error_msg">{nameErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="email"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={emailChangeHandler}
             />
             <label htmlFor="email">Email</label>
+            <p className="error_msg">{emailErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="number"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={phoneChangeHandler}
             />
             <label htmlFor="email">Phone</label>
+            <p className="error_msg">{phoneErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="text"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={stateChangeHandler}
             />
             <label htmlFor="email">State</label>
+            <p className="error_msg">{stateErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="text"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={distChangeHandler}
             />
             <label htmlFor="email">District</label>
+            <p className="error_msg">{distErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="text"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={addressChangeHandler}
             />
             <label htmlFor="email">Address</label>
+            <p className="error_msg">{addressErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
@@ -113,15 +183,17 @@ const RegisterPage = () => {
               onChange={passChangeHandler}
             />
             <label htmlFor="email">Password</label>
+            <p className="error_msg">{passErrorMsg}</p>
           </div>
           <div className="float-label1">
             <input
               type="number"
               required
               onBlur={blurHandler}
-              onChange={passChangeHandler}
+              onChange={pinChangeHandler}
             />
             <label htmlFor="email">Pincode</label>
+            <p className="error_msg">{pinErrorMsg}</p>
           </div>
           <input type="checkbox" className="terms_conditions" id="terms" />
           <label htmlFor="terms" className="conditions">
