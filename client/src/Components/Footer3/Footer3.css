@@ -1,10 +1,19 @@
 .footer3 {
-  margin-top: 140px;
-  margin-left: 670px;
-  width: 30px;
+  margin-top: 22px;
+  margin-left: 0px;
+  width: 1333px;
+  height: 50px;
+  background: #182838 0% 0% no-repeat padding-box;
+  border: 1px solid #707070;
+  opacity: 1;
+  color: #182838;
+}
+
+.footer3_message {
+  margin-top: 15px;
+  margin-left: 580px;
+  width: 199px;
   height: 16px;
-  text-align: center;
-  font: normal normal normal 12px/24px Avenir;
-  letter-spacing: 0.12px;
-  color: #ffffff;
+  opacity: 1;
+  color: white;
 }
