@@ -138,6 +138,7 @@ const RegisterPage = () => {
       pincode: pincode,
     });
   };
+
   return (
     <div className="container1">
       <section className="register_text">
