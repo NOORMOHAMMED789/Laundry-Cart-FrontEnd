@@ -156,7 +156,8 @@ const RegisterPage = () => {
       .then((data) => {
         console.log(data);
         if (data.message === "Account already exists") {
-          alert("User Already Exists.Please, Login !!!");
+          setModal(!modal);
+          // alert("User Already Exists.Please, Login !!!");
           navigate("/", { replace: true });
         } else {
           alert("Registration Successful");

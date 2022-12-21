@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
 import { useNavigate } from "react-router-dom";
-import { setToken } from "../../authOperations";
+import { getToken, setToken } from "../../authOperations";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const SignupPage = () => {
@@ -42,37 +42,38 @@ const SignupPage = () => {
     }
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = (e) => {
     const { email, password } = data;
     e.preventDefault();
-    try {
-      const response = await fetch(`${URL}/api/v1/user/login`, {
-        method: "POST",
-        mode: "cors",
-        credentials: "same-origin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
+    fetch(`${URL}/api/v1/user/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "Failed") {
+          setMessage(data.message);
+        } else {
+          const token = data.token;
+          console.log(token);
+          console.log(data.name);
+          setToken(token);
+          if (token === getToken(token)) {
+            navigate("/home");
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setMessage("Invalid User");
       });
-      const data = await response.json();
-      if (data.status === "failed") {
-        setMessage(data.message);
-      } else {
-        const token = data.token;
-        console.log(token);
-        console.log(data.name);
-        setToken(token);
-        navigate("/home");
-      }
-    } catch (e) {
-      console.log(e);
-      setMessage("Invalid User");
-    }
   };
   return (
     <div className="container">
@@ -113,7 +114,9 @@ const SignupPage = () => {
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
           <p className="invalid">{message}</p>
-          <button className="section2_btn">Sign In</button>
+          <button className="section2_btn" onClick={submitHandler}>
+            Sign In
+          </button>
         </form>
       </section>
     </div>
