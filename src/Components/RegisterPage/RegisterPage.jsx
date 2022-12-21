@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
+import Modal from "../Modal/Modal";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const RegisterPage = () => {
@@ -13,6 +14,7 @@ const RegisterPage = () => {
   const [addressErrorMsg, setAddressErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [pinErrorMsg, setPinErrorMsg] = useState("");
+  const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -23,6 +25,10 @@ const RegisterPage = () => {
     pincode: "",
     password: "",
   });
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   //! Handles the blur event when you out focus it.
   const blurHandler = () => {
@@ -151,14 +157,14 @@ const RegisterPage = () => {
       .then((data) => {
         console.log(data);
         if (data.message === "Account already exists") {
-          alert("User Already Exists, Please Login");
+          alert("User Already Exists.Please, Login !!!");
           navigate("/", { replace: true });
         } else {
           alert("Registration Successful");
         }
       })
       .catch((e) => {
-        alert("Interval Server");
+        alert(e.message);
       });
   };
 
@@ -261,7 +267,7 @@ const RegisterPage = () => {
             I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button className="section2_btn1" onClick={submitHandler}>
+          <button className="section2_btn1" onClick={toggleModal}>
             Register
           </button>
         </form>
