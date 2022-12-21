@@ -43,7 +43,7 @@ const CatelogRow = () => {
             case "bleach":
                 document.getElementById(service).src = '/icons/bleach -highlighted.svg';
                 break;
-            default : console.log("We are currently not offering this service")
+            default: console.log("We are currently not offering this service")
         }
     }
 
@@ -82,7 +82,36 @@ const CatelogRow = () => {
     }
 
     const handleSubmit = () => {
-        // TODO
+        const date = Date.now();
+        const order_id = `ORLA${date}`;
+        let total_items = 0;
+        let total_price = 0;
+        for (let i = 0; i < totalCart.length; i++) {
+            const quantity = totalCart[i]["value"][0];
+            total_items += quantity;
+            total_price += totalCart[i]["value"][1] * quantity;
+        }
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiemVlc2hhbjQwMDI5MTFAZ21haWwuY29tIiwiaWF0IjoxNjcxNjM0MjAxLCJleHAiOjE2NzE2Mzc4MDF9.HZAr9OmaZuCD8BiNfaNZGYemXUmgSw96q3rvv29vX7Y";
+
+        fetch(URL + "/api/v1/order/", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": token
+            },
+            body: JSON.stringify({
+                orderId: order_id,
+                storeLocation: "JP Nagar",
+                city: "Bangalore",
+                storePhone: 9988667755,
+                totalItems: total_items,
+                price: total_price,
+            })
+        }).then(response => response.json())
+        .then((data) => {
+            (data.status === "Success") ? alert("Order placed Succefully") : alert("failed to placed the order");
+            setTotalCart([]);
+        })
     }
 
     return (
