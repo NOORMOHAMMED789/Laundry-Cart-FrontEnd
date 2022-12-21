@@ -1,5 +1,63 @@
 body {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;    
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Utility classes */
+
+.btn-vt {
+    color: #5861ae;
+    border: 1px solid #5861ae;
+    border-radius: 4;
+    margin: 0 2vw;
+    padding: .2rem 2rem;
+    background: white;
+    cursor: pointer
+}
+
+.pad {
+    padding: 0 2rem;
+}
+
+/* Default Styling of Application */
+
+th {
+    background-color: #383737;
+    color: white;
+    font: normal normal 600 12px/48px Open Sans;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    border: 1px solid #EAEDF0;
+}
+
+#order-table tr {
+    height: 4vh;
+}
+
+#catelog-table tr {
+    height: 8vh;
+}
+
+thead>tr>th:first-child {
+    border-radius: .5rem 0 0 0;
+}
+
+thead>tr>th:last-child {
+    border-radius: 0 .5rem 0 0;
+}
+
+tbody>tr:nth-child(2n+2) {
+    background-color: #FAFAFA;
 }
