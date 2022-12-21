@@ -8,7 +8,7 @@ input:focus {
     outline: none;
 }
 
-#catelog-table {
+#catelog-table, #order-table {
     max-height: 65vh;
     display: block;
     overflow-y: scroll;
@@ -76,4 +76,21 @@ thead>tr>th:last-child {
 
 tbody>tr:nth-child(2n+2) {
     background-color: #FAFAFA;
+}
+
+
+/* Summary CSS */
+
+#summary {
+    width: 60vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    height: 100vh;
+    z-index: 100;
+}
+
+.blur {
+    filter: blur(2px);
 }

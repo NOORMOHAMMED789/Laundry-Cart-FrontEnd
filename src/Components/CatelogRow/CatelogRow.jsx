@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./summary.module.css";
 const URL = process.env.REACT_APP_API_KEY || "http://localhost:3001"
 
 const CatelogRow = () => {
+    const navigate = useNavigate();
     const [rowData, setRowData] = useState(null);
     const [quantity, setQuantity] = useState(""); // For realtime validation of quantity input
-    const [totalCart, setTotalCart] = useState([]); // Cart which will store key as product id, value [quantity, price], services as boolean
+    const [totalCart, setTotalCart] = useState([]); // Cart which will store key as key_<product id>,product name, value [quantity, price, total], services as boolean
+    const [summaryOn, setSummaryOn] = useState(false);
 
     useEffect(() => {
-        fetch(URL + '/api/v1/product').then((response) => response.json()).then(data => { setRowData(data.products); console.log(data) });
+        fetch(URL + '/api/v1/product').then((response) => {
+            if (response.status === 403) return navigate("/");
+            return response.json()
+        }
+        ).then(data => { setRowData(data.products); console.log(data) });
     }, [])
 
     // Handling and adding to cart the user services
     const handleService = (service) => {
         let arr = service.split("_");
-        const id = parseInt(arr[1]);
+        const id = arr[1];
         const serviceName = arr[0];
 
         // Restricting to select when quantity is empty
-        const input = document.getElementById(id);
+        const input = document.getElementById(`key_${id}`);
         if (input.value === 0 || input.value === "") return
 
         setTotalCart(prevState => {
             for (let i = 0; i < prevState.length; i++) {
-                if (prevState[i].key === id) {
+                if (prevState[i].key === `key_${id}`) {
                     prevState[i][serviceName] = true;
                     break;
                 }
@@ -48,42 +56,45 @@ const CatelogRow = () => {
     }
 
     // Handling and validating the quantity input field
-    const updateQuantity = (quantity, id, price) => {
+    const updateQuantity = (quantity, id, price, name) => {
         if (Number.isInteger(parseInt(quantity)) && parseInt(quantity) > 0) {
             setQuantity(quantity);
-            document.getElementById(id).disabled = true;
+            document.getElementById(`key_${id}`).disabled = true;
 
             // Adding quantity and price with key as product id into the cart
-            setTotalCart(prevState => [...prevState, { key: id, value: [parseInt(quantity), parseInt(price)] }]);
+            setTotalCart(prevState => [...prevState, { key: `key_${id}`, name, value: [parseInt(quantity), parseInt(price), parseInt(quantity) * parseInt(price)] }]);
             document.getElementById(`calc-${id}`).innerHTML = `${quantity} x ${price} = <span style=color:#5861AE;font-size:20px>${quantity * price}</span>`;
             document.getElementById(`reset-btn-${id}`).style.display = 'block';
 
         }
         else {
             setQuantity(0);
-            document.getElementById(id).value = 0;
+            document.getElementById(`key_${id}`).value = 0;
         }
     }
 
     const handleReset = (id) => {
 
         // deleteing data from cart
-        setTotalCart(prevState => prevState.filter((data) => (data.key === id) ? false : true));
+        setTotalCart(prevState => prevState.filter((data) => (data.key === `key_${id}`) ? false : true));
 
         // resetting the UI
         document.getElementById(`washing-machine_${id}`).src = `/icons/washing-machine.svg`;
         document.getElementById(`ironing_${id}`).src = `/icons/ironing.svg`;
         document.getElementById(`towel_${id}`).src = `/icons/towel.svg`;
         document.getElementById(`bleach_${id}`).src = `/icons/bleach.svg`;
-        document.getElementById(id).value = "";
-        document.getElementById(id).disabled = false;
+        document.getElementById(`key_${id}`).value = "";
+        document.getElementById(`key_${id}`).disabled = false;
         document.getElementById(`reset-btn-${id}`).style.display = 'none';
         document.getElementById(`calc-${id}`).innerText = '__';
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (arg) => {
+        if (arg === "proceed") { return setSummaryOn(true) };
         const date = Date.now();
         const order_id = `ORLA${date}`;
+        const storeLocation = document.getElementById("storeLocation").value || "JP Nagar";
+        const storePhone = document.getElementById("storePhone").vale || 9988776655;
         let total_items = 0;
         let total_price = 0;
         for (let i = 0; i < totalCart.length; i++) {
@@ -91,34 +102,61 @@ const CatelogRow = () => {
             total_items += quantity;
             total_price += totalCart[i]["value"][1] * quantity;
         }
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiemVlc2hhbjQwMDI5MTFAZ21haWwuY29tIiwiaWF0IjoxNjcxNjM0MjAxLCJleHAiOjE2NzE2Mzc4MDF9.HZAr9OmaZuCD8BiNfaNZGYemXUmgSw96q3rvv29vX7Y";
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoiemVlc2hhbjQwMDI5MTFAZ21haWwuY29tIiwiaWF0IjoxNjcxNjYwNjIwLCJleHAiOjE2NzE2NjQyMjB9.FEDsioSsHwVgr2rgwwDwrglX_Xet-dp9SQTMDt4yQ8U";
 
         fetch(URL + "/api/v1/order/", {
             method: "POST",
-            headers: { 
+            headers: {
                 "Content-Type": "application/json",
                 "Authorization": token
             },
             body: JSON.stringify({
                 orderId: order_id,
-                storeLocation: "JP Nagar",
+                storeLocation: storeLocation,
                 city: "Bangalore",
-                storePhone: 9988667755,
+                storePhone: storePhone,
                 totalItems: total_items,
                 price: total_price,
             })
-        }).then(response => response.json())
-        .then((data) => {
-            (data.status === "Success") ? alert("Order placed Succefully") : alert("failed to placed the order");
-            setTotalCart([]);
+        }).then(response => {
+            if (response.status === 403) return navigate("/");
+            return response.json()
         })
+            .then((data) => {
+                (data.status === "Success") ? alert("Order placed Succefully") : alert("failed to placed the order");
+                setTotalCart([]);
+                navigate("/home");
+            })
     }
 
     return (
         <>
-            <table id="catelog-table">
+            {summaryOn ?
+                <div id="summary">
+                    <div className={styles.heading}>Summary</div>
+                    <div className={styles.subheading}>
+                        <div className={styles.inline_hd}>Store Location: <input id="storeLocation" type="text" placeholder="__" className={styles.block_input} required /></div>
+                        <div className={styles.inline_hd}>Store Address: <input id="storeAddress" type="text" placeholder="__" className={styles.block_input} required/></div>
+                        <div className={styles.inline_hd}>Phone: <input type="tel" id="storePhone" placeholder="__" className={styles.block_input} required/></div>
+                    </div>
+                    <p style={{ color: "#3B3737", paddingLeft: "1rem" }}>Order Details</p>
+                    <ol className={styles.list_style}>
+                        {totalCart.map(data => (
+                            <li key={data.key} className={styles.bottom_border}>
+                                <span className={styles.inline_hd}>{data.name}</span>
+                                <span className={styles.inline_hd}>Washing, ironing</span>
+                                <span className={styles.inline_hd}>{data.value[0]} x {data.value[1]} = <span style={{color: "#5861AE", fontSize: "1.5rem"}}> {data.value[2]}</span></span>
+                            </li>
+                        ))}
+                    </ol>
+                    <button className="btn-vt-fill corner" onClick={()=> handleSubmit("confirm")}>Confirm</button>
+                </div>
+                :
+                <></>
+            }
+            <table id="catelog-table" className={summaryOn ? "blur" : ""}>
                 <thead>
-                    <tr>
+                    <tr style={{ position: "sticky", top: 0 }}>
                         <th style={{ padding: "0 .5rem", width: "25vw" }}>Product Types</th>
                         <th style={{ width: 10 }}>Quantity</th>
                         <th style={{ width: "30vw" }}>Wash Type</th>
@@ -139,7 +177,7 @@ const CatelogRow = () => {
                                         <div style={{ color: "#777" }}>{obj.description}</div>
                                     </div>
                                 </td>
-                                <td ><input type="text" id={obj.id} placeholder="0" style={{ width: 30, textAlign: "center" }} onBlur={(e) => updateQuantity(e.target.value, obj.id, obj.price)} /></td>
+                                <td ><input type="text" id={`key_${obj.id}`} placeholder="0" style={{ width: 30, textAlign: "center" }} onBlur={(e) => updateQuantity(e.target.value, obj.id, obj.price, obj.name)} /></td>
                                 <td>
                                     <img className="pad" src="/icons/washing-machine.svg" id={`washing-machine_${obj.id}`} alt="washing-machine" onClick={() => handleService(`washing-machine_${obj.id}`)} />
                                     <img className="pad" src="/icons/ironing.svg" id={`ironing_${obj.id}`} alt="ironing" onClick={() => handleService(`ironing_${obj.id}`)} />
@@ -153,14 +191,14 @@ const CatelogRow = () => {
                                     <button className="btn-vt" id={`reset-btn-${obj.id}`} style={{ display: "none" }} onClick={() => handleReset(obj.id)}>Reset</button>
                                 </td>
                             </tr>
-                        )) : <tr><td style={{ position: "absolute", left: "40vw", top: "40vh" }}>Our Server is Down Currently.... Visit Us Later</td></tr>
+                        )) : <tr><td style={{ position: "absolute", left: "40vw", top: "40vh" }}>Requesting for Services from Our server......</td></tr>
                     }
                 </tbody>
             </table>
             {rowData ?
                 <div style={{ float: "right", marginTop: "1rem" }}>
                     <button className="btn-vt">Cancel</button>
-                    <button className="btn-vt-fill" onClick={() => handleSubmit()}>Proceed</button>
+                    <button className="btn-vt-fill" onClick={() => handleSubmit("proceed")}>Proceed</button>
                 </div>
                 : <></>
             }

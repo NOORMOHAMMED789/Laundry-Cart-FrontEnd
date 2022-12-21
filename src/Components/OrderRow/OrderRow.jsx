@@ -1,56 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import style from "./OrderRow.module.css";
 
 const OrderRow = ({ data }) => {
-    const [rowData, setRowData] = useState(null);
+    data?.map(obj => {
+        const date = new Date(obj.createdAt)
+        return obj.createdAt = date.toLocaleString();
+    });
     return (
-        <table id="order-table">
+        <table id="order-table" className={style.fontSize}>
             <thead>
-                <tr>
-                    <th>Order Id</th>
-                    <th>Order Date and Time</th>
-                    <th>Store Location</th>
-                    <th>City</th>
-                    <th>Store Phone</th>
-                    <th>Total Items</th>
-                    <th>Price</th>
-                    <th>Status</th>
-                    <th> </th>
-                    <th>View</th>
+                <tr style={{ position: "sticky", top: 0 }}>
+                    <th className={style.cell}>Order Id</th>
+                    <th className={style.cell}>Order Date and Time</th>
+                    <th className={style.cell}>Store Location</th>
+                    <th className={style.cell}>City</th>
+                    <th className={style.cell}>Store Phone</th>
+                    <th className={style.cell}>Total Items</th>
+                    <th className={style.cell}>Price</th>
+                    <th className={style.cell}>Status</th>
+                    <th className={style.cell}> </th>
+                    <th className={style.cell}>View</th>
                 </tr>
             </thead>
-            {/* TODO --- dummy for now*/}
             <tbody>
-                {/* {data ?
-                    data.map(obj => (
-                        <tr>
-                            fetched data
-                        </tr>
-                    )) : <></>
-                } */}
-                <tr>
-                    <td>RMD12</td>
-                    <td>20 Dec 2022, 10:32</td>
-                    <td>Delhi</td>
-                    <td>Delhi</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                </tr>
-                <tr>
-                    <td>RMD13</td>
-                    <td>20 Dec 2022, 11:05</td>
-                    <td>Mumbai</td>
-                    <td>dummy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td>dummmy</td>
-                    <td></td>
-                    <td>dummmy</td>
-                </tr>
+                {data?.map(obj => (
+                    <tr key={obj.orderId}>
+                        <td>{obj.orderId}</td>
+                        <td>{obj.createdAt}</td>
+                        <td>{obj.storeLocation}</td>
+                        <td>{obj.city}</td>
+                        <td>{obj.storePhone}</td>
+                        <td>{obj.totalItems}</td>
+                        <td style={{ color: "#5861AE", fontWeight: "bold" }}>{obj.price}</td>
+                        <td>{obj.status}</td>
+                        <td><button className="btn-vt" style={{ color: "red", border: "none", background: "transparent" }}>Cancel</button> </td>
+                        <td><img src="/icons/view.png" alt="view" width="15vw" /></td>
+                    </tr>
+                ))
+                }
             </tbody>
         </table>
     )
