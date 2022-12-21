@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
+  const naviagte = useNavigate();
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [phoneErrorMsg, setPhoneErrorMsg] = useState("");
@@ -149,9 +151,13 @@ const RegisterPage = () => {
         console.log(data);
         if (data.message === "Account already exists") {
           alert("User Already Exists, Please Login");
+          naviagte("/", { replace: true });
         } else {
           alert("Registration Successful");
         }
+      })
+      .catch((e) => {
+        alert("e.message");
       });
   };
 
