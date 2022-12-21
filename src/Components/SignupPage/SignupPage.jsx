@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
 import { useNavigate } from "react-router-dom";
+import { setToken } from "../../authOperations";
+const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
+  const [message, setMessage] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -39,10 +42,37 @@ const SignupPage = () => {
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const { email, password } = data;
-    console.log({ email: email, password: password });
+    e.preventDefault();
+    try {
+      const response = await fetch(`${URL}/api/v1/user/login`, {
+        method: "POST",
+        mode: "cors",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+      const data = await response.json();
+      if (data.status === "failed") {
+        setMessage(data.message);
+      } else {
+        const token = data.token;
+        console.log(token);
+        console.log(data.name);
+        setToken(token);
+        navigate("/home");
+      }
+    } catch (e) {
+      console.log(e);
+      setMessage("Invalid User");
+    }
   };
   return (
     <div className="container">
@@ -82,6 +112,7 @@ const SignupPage = () => {
           </div>
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
+          <p className="invalid">{message}</p>
           <button className="section2_btn">Sign In</button>
         </form>
       </section>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
-import Modal from "../Modal/Modal";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const RegisterPage = () => {
