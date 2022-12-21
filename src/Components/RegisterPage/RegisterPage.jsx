@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./RegisterPage.css";
+const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const RegisterPage = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [phoneErrorMsg, setPhoneErrorMsg] = useState("");
@@ -130,7 +131,7 @@ const RegisterPage = () => {
       Password,
     } = userData;
 
-    fetch("http://localhost:3001/api/v1/user/register", {
+    fetch(`${URL}/api/v1/user/register`, {
       method: "POST",
       body: JSON.stringify({
         name: Name,
@@ -151,13 +152,13 @@ const RegisterPage = () => {
         console.log(data);
         if (data.message === "Account already exists") {
           alert("User Already Exists, Please Login");
-          naviagte("/", { replace: true });
+          navigate("/", { replace: true });
         } else {
           alert("Registration Successful");
         }
       })
       .catch((e) => {
-        alert("e.message");
+        alert("Interval Server");
       });
   };
 
@@ -167,7 +168,10 @@ const RegisterPage = () => {
         <h1 className="register_title">Laundry Service</h1>
         <h4 className="register_para">Doorstep Wash & Dryclean Service</h4>
         <p className="section1_para11">Don't Have An Account?</p>
-        <button className="section1_btn1">Sign In</button>
+
+        <button onClick={() => navigate("/")} className="section1_btn1">
+          Sign In
+        </button>
       </section>
       <section className="register-2">
         <h1 className="register2_title">REGISTER</h1>
@@ -180,7 +184,7 @@ const RegisterPage = () => {
               onChange={nameChangeHandler}
             />
             <label htmlFor="email">Name</label>
-            <p className="error_msg">{nameErrorMsg}</p>
+            <div className="error_msg">{nameErrorMsg}</div>
           </div>
           <div className="float-label1">
             <input

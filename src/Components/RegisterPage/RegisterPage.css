@@ -1,6 +1,6 @@
 .float-label1 {
   display: grid;
-  grid-auto-flow: column;
+  grid-auto-flow: row;
 }
 
 .register2_form {
@@ -10,7 +10,7 @@
 }
 
 .float-label1 input {
-  width: 50%;
+  width: 69%;
   height: 57px;
   padding: 14px 16px 0 10px;
   background: #fff;
@@ -95,7 +95,6 @@
   margin-left: 65px;
   width: 157px;
   height: 44px;
-  /* UI Properties */
   text-align: left;
   font: normal normal medium 32px/60px Avenir;
   letter-spacing: 1.28px;
@@ -191,4 +190,12 @@
 .error_msg {
   color: red;
   font-size: 12px;
+  margin: -5px 0px 5px 137px;
+}
+
+.section1_btn1:hover {
+  background-color: #4552c1;
+  color: white;
+  box-shadow: 2px 2px 10px gray;
+  transform: scale(1.01);
 }
