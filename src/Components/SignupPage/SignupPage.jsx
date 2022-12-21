@@ -17,7 +17,7 @@ const SignupPage = () => {
   // const data = useRef();
   const blurHandler = () => {
     setErrorMsg("");
-    setPassErrorMsg("");
+    setMessage("");
   };
 
   const emailChangeHandler = (e) => {
@@ -62,11 +62,11 @@ const SignupPage = () => {
           setMessage(data.message);
         } else {
           const token = data.token;
-          console.log(token);
-          console.log(data.name);
           setToken(token);
           if (token === getToken(token)) {
-            navigate("/home");
+            console.log(token);
+            console.log(data.name);
+            navigate("/home", { state: { name: data.name } });
           }
         }
       })

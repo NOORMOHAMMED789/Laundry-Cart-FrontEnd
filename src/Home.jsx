@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "./Components/Header/SigninHeader";
+import HomeHeader from "./Components/HomeHeader/HomeHeader";
 import Sidebar from "./Components/Sidebar/Sidebar";
 
 export default function Home() {
-    return (
-        <>
-        < Header />
-        < Sidebar />
-        </>
-    )
-} 
+  return (
+    <>
+      <HomeHeader />
+      <Sidebar />
+    </>
+  );
+}
