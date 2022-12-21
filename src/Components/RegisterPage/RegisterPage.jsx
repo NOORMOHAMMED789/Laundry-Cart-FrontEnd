@@ -11,14 +11,14 @@ const RegisterPage = () => {
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [pinErrorMsg, setPinErrorMsg] = useState("");
   const [userData, setUserData] = useState({
-    Name: "",
-    Email: "",
-    PhoneNumber: "",
-    State: "",
-    District: "",
-    Address: "",
-    Password: "",
+    name: "",
+    email: "",
+    phoneNumber: "",
+    state: "",
+    district: "",
+    address: "",
     pincode: "",
+    password: "",
   });
 
   //! Handles the blur event when you out focus it.
@@ -124,19 +124,35 @@ const RegisterPage = () => {
       State,
       District,
       Address,
-      Password,
       pincode,
+      Password,
     } = userData;
-    console.log({
-      Name: Name,
-      Email: Email,
-      PhoneNumber: PhoneNumber,
-      State: State,
-      District: District,
-      Address: Address,
-      Password: Password,
-      pincode: pincode,
-    });
+
+    fetch("http://localhost:3001/api/v1/user/register", {
+      method: "POST",
+      body: JSON.stringify({
+        name: Name,
+        email: Email,
+        phone: PhoneNumber,
+        state: State,
+        district: District,
+        address: Address,
+        pincode: pincode,
+        password: Password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message === "Account already exists") {
+          alert("User Already Exists, Please Login");
+        } else {
+          alert("Registration Successful");
+        }
+      });
   };
 
   return (
@@ -235,7 +251,9 @@ const RegisterPage = () => {
             I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button className="section2_btn1">Register</button>
+          <button className="section2_btn1" onClick={submitHandler}>
+            Register
+          </button>
         </form>
       </section>
     </div>
