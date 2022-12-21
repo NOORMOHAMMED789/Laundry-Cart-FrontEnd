@@ -8,15 +8,31 @@ input:focus {
     outline: none;
 }
 
+#catelog-table {
+    max-height: 65vh;
+    display: block;
+    overflow-y: scroll;
+}
+
 /* Utility classes */
 
 .btn-vt {
     color: #5861ae;
+    background-color: white;
     border: 1px solid #5861ae;
-    border-radius: 4;
+    border-radius: 4px;
     margin: 0 2vw;
     padding: .2rem 2rem;
-    background: white;
+    cursor: pointer
+}
+
+.btn-vt-fill {
+    color: white;
+    background-color: #5861ae;
+    border: none;
+    border-radius: 4px;
+    margin: 0 2vw;
+    padding: .2rem 2rem;
     cursor: pointer
 }
 
