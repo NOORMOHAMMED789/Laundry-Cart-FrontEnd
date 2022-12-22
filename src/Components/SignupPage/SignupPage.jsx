@@ -9,6 +9,7 @@ const SignupPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [message, setMessage] = useState("");
+  const [isDisabled, setDisabled] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -43,8 +44,11 @@ const SignupPage = () => {
   };
 
   const submitHandler = (e) => {
-    const { email, password } = data;
     e.preventDefault();
+    if (errorMsg === "" && passErrorMsg === "") {
+      setDisabled(true);
+    }
+    const { email, password } = data;
     fetch(`${URL}/api/v1/user/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -104,17 +108,18 @@ const SignupPage = () => {
               required
               onBlur={blurHandler}
               onChange={passChangeHandler}
+              name="password field"
             />
             <label htmlFor="email">Password</label>
-            <img
-              src="client\Laundry-Cart-FrontEnd\client\public\icons\padlock.svg"
-              alt=""
-            />
           </div>
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
           <p className="invalid">{message}</p>
-          <button className="section2_btn" onClick={submitHandler}>
+          <button
+            className="section2_btn"
+            onClick={submitHandler}
+            disabled={isDisabled}
+          >
             Sign In
           </button>
         </form>
