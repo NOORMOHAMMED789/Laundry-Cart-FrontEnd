@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../../authOperations";
 import styles from "./summary.module.css";
 import PopModal from "../PopModal/PopModal";
-import AlertPopUp from "../AlertPopUp/AlertPopUp";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const CatelogRow = () => {
@@ -95,8 +94,7 @@ const CatelogRow = () => {
       ]);
       document.getElementById(
         `calc-${id}`
-      ).innerHTML = `${quantity} x ${price} = <span style=color:#5861AE;font-size:20px>${
-        quantity * price
+      ).innerHTML = `${quantity} x ${price} = <span style=color:#5861AE;font-size:20px>${quantity * price
       }</span>`;
       document.getElementById(`reset-btn-${id}`).style.display = "block";
     } else {
@@ -128,12 +126,6 @@ const CatelogRow = () => {
     if (arg === "proceed") {
       return setSummaryOn(true);
     }
-    const date = Date.now();
-    const order_id = `ORLA${date}`;
-    const storeLocation =
-      document.getElementById("storeLocation").value || "JP Nagar";
-    const storePhone =
-      document.getElementById("storePhone").value || 9988776655;
     let total_items = 0;
     let total_price = 0;
     for (let i = 0; i < totalCart.length; i++) {
@@ -141,6 +133,13 @@ const CatelogRow = () => {
       total_items += quantity;
       total_price += totalCart[i]["value"][1] * quantity;
     }
+    if (arg === "total") { return total_price }
+    total_price += 90; // Delivery Charges
+    const date = Date.now();
+    const order_id = `ORLA${date}`;
+    const storeLocation =
+      document.getElementById("storeLocation").value || "JP Nagar";
+    const storePhone = document.getElementById("storePhone").value || 9988776655;
 
     const token = getToken("token");
     console.log(token);
@@ -157,6 +156,7 @@ const CatelogRow = () => {
         storePhone: storePhone,
         totalItems: total_items,
         price: total_price,
+        cart: totalCart
       }),
     })
       .then((response) => {
@@ -173,6 +173,19 @@ const CatelogRow = () => {
       });
   };
 
+  const getService = (key) => {
+    let serviceStr = "";
+    for (let i = 0; i < totalCart.length; i++) {
+      if (totalCart[i].key === key) {
+        if (totalCart[i].hasOwnProperty("washing-machine")) serviceStr += "Washing, ";
+        if (totalCart[i].hasOwnProperty("ironing")) serviceStr += "Ironing, ";
+        if (totalCart[i].hasOwnProperty("towel")) serviceStr += "Dry Wash, ";
+        if (totalCart[i].hasOwnProperty("bleach")) serviceStr += "Chemical Wash";
+        return serviceStr;
+      }
+    }
+  }
+
   return (
     <>
       {openPop ? <PopModal setOpenPop={setOpenPop} /> : <></>}
@@ -184,6 +197,7 @@ const CatelogRow = () => {
               Store Location:{" "}
               <input
                 id="storeLocation"
+                defaultValue="Jp Nagar"
                 type="text"
                 placeholder="__"
                 className={styles.block_input}
@@ -194,6 +208,7 @@ const CatelogRow = () => {
               Store Address:{" "}
               <input
                 id="storeAddress"
+                defaultValue="Near Phone booth, 10th road,"
                 type="text"
                 placeholder="__"
                 className={styles.block_input}
@@ -204,6 +219,7 @@ const CatelogRow = () => {
               Phone:{" "}
               <input
                 type="tel"
+                defaultValue="9999999999"
                 id="storePhone"
                 placeholder="__"
                 className={styles.block_input}
@@ -215,24 +231,34 @@ const CatelogRow = () => {
           <ol className={styles.list_style}>
             {totalCart.map((data) => (
               <li key={data.key} className={styles.bottom_border}>
-                <span className={styles.inline_hd}>{data.name}</span>
-                <span className={styles.inline_hd}>Washing, ironing</span>
-                <span className={styles.inline_hd}>
+                <span className={styles.inline_hd} style={{ width: "5vw" }}>{data.name}</span>
+                <span className={styles.inline_hd} style={{ width: "20vw" }}>{getService(data.key)}</span>
+                <span className={styles.inline_hd} style={{ width: "10vw" }}>
                   {data.value[0]} x {data.value[1]} ={" "}
-                  <span style={{ color: "#5861AE", fontSize: "1.5rem" }}>
+                  <span style={{ color: "#5861AE", fontSize: "1.3rem" }}>
                     {" "}
                     {data.value[2]}
                   </span>
                 </span>
               </li>
             ))}
+            <li className={styles.total_block} >Sub Total: &nbsp;&nbsp;{handleSubmit("total")}</li>
+            <li className={styles.total_block}>Pickup Charges: 90</li>
+            <li className={styles.total_block} style={{background: "#5861AE", color: "white", width: "35vw", textAlign: "right"}}>Total: <span style={{fontSize: "1.8rem"}}>{parseInt(handleSubmit("total")) + 90}</span></li>
+            <li className={styles.address}>Address
+              <div className={styles.homeAddress}>
+                <div><img src="/icons/tick.svg" style={{float: "right"}}/></div>
+                <div style={{fontWeight: "bold"}}>Home</div>
+                <div style={{color: "#777"}}>#223, 10th road, JP Nagar, Bangalore</div>
+              </div>
+            </li>
+            <li className={styles.corner} style={{border: "none"}}>
+            <button
+              className="btn-vt-fill"
+              onClick={() => handleSubmit("confirm")}>Confirm
+            </button>
+            </li>
           </ol>
-          <button
-            className="btn-vt-fill corner"
-            onClick={() => handleSubmit("confirm")}
-          >
-            Confirm
-          </button>
         </div>
       ) : (
         <></>
