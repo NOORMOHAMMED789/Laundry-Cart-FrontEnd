@@ -52,3 +52,11 @@
 .footer2_sec3 {
   margin-top: 10px;
 }
+
+.footer2_socialmedia {
+  display: flex;
+  gap: 30px;
+}
+.footer2_socialmedia__icons {
+  width: 40px;
+}

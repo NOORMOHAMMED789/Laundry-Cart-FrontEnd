@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import "./HomeHeader.css";
-import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { getToken } from "../../authOperations";
 
 const SigninHeader = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [showLogout, setShowLogout] = useState(false);
   const changeHandler = () => {
     setShowLogout(!showLogout);
@@ -24,7 +23,7 @@ const SigninHeader = () => {
           <li className="nav_lists__links">Career</li>
           <li className="nav_lists__links color" onClick={changeHandler}>
             <span className="home_pic"></span>
-            {location.state.name}
+            {getToken("Username")}
           </li>
         </ul>
       </nav>

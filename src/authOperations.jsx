@@ -1,19 +1,19 @@
-function getToken() {
+function getToken(name) {
   if (window.localStorage) {
-    return localStorage.getItem("token");
+    return localStorage.getItem(name);
   }
   return "";
 }
 
-function setToken(token) {
+function setToken(name, value) {
   if (window.localStorage) {
-    localStorage.setItem("token", token);
+    localStorage.setItem(name, value);
   }
 }
 
-function removeToken() {
+function removeToken(name) {
   if (window.localStorage) {
-    localStorage.removeItem("token");
+    localStorage.removeItem(name);
   }
 }
 

@@ -1,0 +1,10 @@
+.cell {
+    width: 10%;
+}
+
+.fontSize {
+    font-family: Open Sans;
+    font-size: 12px;
+    letter-spacing: 0px;
+    color: #1E2022;
+}

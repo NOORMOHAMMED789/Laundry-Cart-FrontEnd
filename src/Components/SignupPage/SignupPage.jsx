@@ -62,11 +62,12 @@ const SignupPage = () => {
           setMessage(data.message);
         } else {
           const token = data.token;
-          setToken(token);
-          if (token === getToken(token)) {
+          setToken("token", token);
+          if (token === getToken("token")) {
             console.log(token);
             console.log(data.name);
-            navigate("/home", { state: { name: data.name } });
+            setToken("Username", data.name);
+            navigate("/home");
           }
         }
       })
