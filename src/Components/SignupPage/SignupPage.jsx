@@ -9,7 +9,6 @@ const SignupPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [message, setMessage] = useState("");
-  const [isDisabled, setDisabled] = useState(false);
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -45,9 +44,6 @@ const SignupPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (errorMsg === "" && passErrorMsg === "") {
-      setDisabled(true);
-    }
     const { email, password } = data;
     fetch(`${URL}/api/v1/user/login`, {
       method: "POST",
@@ -76,7 +72,7 @@ const SignupPage = () => {
       })
       .catch((e) => {
         console.log(e);
-        setMessage("Invalid User");
+        setMessage("Server down. try after sometime !!");
       });
   };
   return (
@@ -115,11 +111,7 @@ const SignupPage = () => {
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
           <p className="invalid">{message}</p>
-          <button
-            className="section2_btn"
-            onClick={submitHandler}
-            disabled={isDisabled}
-          >
+          <button className="section2_btn" onClick={submitHandler}>
             Sign In
           </button>
         </form>
