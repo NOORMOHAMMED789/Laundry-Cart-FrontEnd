@@ -18,8 +18,12 @@
 }
 
 .inline_hd {
-    padding: 1rem 3rem;
+    padding: 1rem 2rem;
     display: inline-block;
+}
+
+.inline_hd>input {
+    color: #777;
 }
 
 .list_style {
@@ -33,4 +37,29 @@
 
 .corner {
     float: right;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+.total_block {
+    margin-right: 5vw;
+    border-bottom: 1px solid #ddd;
+    float: right;
+    padding: 1rem 8rem;
+    color: #777;
+}
+
+.address {
+    display: block;
+    clear: both;
+    padding-top: 2rem;
+}
+
+.homeAddress {
+    border: 1.5px solid #5861AE;
+    padding: 5px;
+    margin: 10px 0;
+    width: 15vw;
+    box-shadow: 1px 1px 5px gray;
 }

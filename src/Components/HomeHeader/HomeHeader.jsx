@@ -22,7 +22,7 @@ const SigninHeader = () => {
           <li className="nav_lists__links">Pricing</li>
           <li className="nav_lists__links">Career</li>
           <li className="nav_lists__links color" onClick={changeHandler}>
-            <span className="home_pic"></span>
+            <span className="home_pic"><img src="/icons/avatar.png" alt="Profile" width="40px"/></span>
             {getToken("Username")}
           </li>
         </ul>
