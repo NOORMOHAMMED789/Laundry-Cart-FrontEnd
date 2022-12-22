@@ -1,0 +1,87 @@
+body.active-modal {
+  overflow-y: hidden;
+}
+
+.btn-modal1 {
+  padding: 10px 20px;
+  display: block;
+  margin: 10px auto 0;
+  font-size: 18px;
+}
+
+.modal1,
+.overlay1 {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+}
+
+.overlay1 {
+  background: rgba(49, 49, 49, 0.8);
+}
+.modal-content1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  width: 186px;
+  height: 144px;
+}
+
+.tickimage {
+  width: 80px;
+  height: 80px;
+  margin: 30px 50px 0px 100px;
+}
+
+.modal_title1 {
+  position: absolute;
+  top: 1px;
+  width: 197px;
+  height: 66px;
+  margin-left: 5px;
+}
+
+.modal_para {
+  width: 263px;
+  height: 45px;
+  text-align: center;
+  font: normal normal normal 17px/22px Open Sans;
+  letter-spacing: -0.41px;
+  color: #0a1f44;
+  opacity: 1;
+  font-size: 17px;
+  margin: -35px 0px 0px 10px;
+}
+
+.alert_img {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 60px;
+}
+
+.alert_para {
+  margin-top: 35px;
+  margin-left: 50px;
+  font-size: 14px;
+}
+
+.alert_btn {
+  width: 87px;
+  height: 32px;
+  background: #5861ae 0% 0% no-repeat padding-box;
+  border: 1px solid #5861ae;
+  border-radius: 4px;
+  opacity: 1;
+  margin-left: 50px;
+  color: #f1f1f1;
+}

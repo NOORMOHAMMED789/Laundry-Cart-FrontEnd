@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../authOperations";
 import styles from "./summary.module.css";
+import PopModal from "../PopModal/PopModal";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const CatelogRow = () => {
   const navigate = useNavigate();
   const [rowData, setRowData] = useState(null);
   const [quantity, setQuantity] = useState(""); // For realtime validation of quantity input
-  const [totalCart, setTotalCart] = useState([]); // Cart which will store key as key_<product id>,product name, value [quantity, price, total], services as boolean
+  const [totalCart, setTotalCart] = useState([]);
   const [summaryOn, setSummaryOn] = useState(false);
+  const [openPop, setOpenPop] = useState(false);
 
   useEffect(() => {
     const token = getToken("token");
@@ -124,6 +127,12 @@ const CatelogRow = () => {
     if (arg === "proceed") {
       return setSummaryOn(true);
     }
+    const date = Date.now();
+    const order_id = `ORLA${date}`;
+    const storeLocation =
+      document.getElementById("storeLocation").value || "JP Nagar";
+    const storePhone =
+      document.getElementById("storePhone").value || 9988776655;
     let total_items = 0;
     let total_price = 0;
     for (let i = 0; i < totalCart.length; i++) {
@@ -162,11 +171,12 @@ const CatelogRow = () => {
         return response.json();
       })
       .then((data) => {
-        data.status === "Success"
-          ? alert("Order placed Succefully")
-          : alert("failed to placed the order");
+        if (data.status === "Success") {
+          setSummaryOn(false);
+          setOpenPop(true);
+        } else alert("failed to placed the order");
         setTotalCart([]);
-        navigate("/home");
+        // navigate("/home");
       });
   };
 
@@ -185,6 +195,7 @@ const CatelogRow = () => {
 
   return (
     <>
+      {openPop ? <PopModal setOpenPop={setOpenPop} /> : <></>}
       {summaryOn ? (
         <div id="summary">
           <div className={styles.heading}>Summary</div>
@@ -261,7 +272,7 @@ const CatelogRow = () => {
       )}
       <table id="catelog-table" className={summaryOn ? "blur" : ""}>
         <thead>
-          <tr style={{ position: "sticky", top: 0 }}>
+          <tr style={{ position: "sticky", top: 0, zIndex: -101 }}>
             <th style={{ padding: "0 .5rem", width: "25vw" }}>Product Types</th>
             <th style={{ width: 10 }}>Quantity</th>
             <th style={{ width: "30vw" }}>Wash Type</th>
