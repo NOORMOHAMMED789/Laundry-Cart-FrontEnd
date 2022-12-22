@@ -1,0 +1,36 @@
+.heading {
+    background: #5861AE;
+    color: #fff;
+    font-size: 2rem;
+    height: 6vh;
+    padding: 2vh 2vw;
+}
+
+.subheading {
+    height: 12.5vh;
+    background-color: #F4F9FF;
+}
+
+.block_input {
+    display: block;
+    margin-top: 1rem;
+    border: none;
+}
+
+.inline_hd {
+    padding: 1rem 3rem;
+    display: inline-block;
+}
+
+.list_style {
+    list-style-type: none;
+}
+
+.bottom_border {
+    margin-right: 5vw;
+    border-bottom: 1px solid #ddd;
+}
+
+.corner {
+    float: right;
+}

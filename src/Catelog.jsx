@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Header from "./Components/Header/SigninHeader";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Footer from "./Components/Footer3/Footer3";
 import CatelogRow from "./Components/CatelogRow/CatelogRow";
 
 export default function Catelog() {
-    const navigate = useNavigate();
-    const [fetchedData, setFetchedData] = useState(null);
-
-    const handleProcessClick = () => {
-        setFetchedData(true);
-    }
-
     return (
         <>
             < Header />
@@ -20,7 +12,7 @@ export default function Catelog() {
             <div className="catelog-container" style={{ height: "85vh", marginLeft: "4vw" }}>
                 <div className="catelog-container-hero" style={{ height: "10vh" }}>
                     <div style={{ position: "absolute", padding: '5vh 5vw' }}>Create Order</div>
-                    <div style={search_style}>
+                    <div style={{ float: "right", margin: "5vh 5vw"}}>
                         <div style={{ display: "inline-block", borderBottom: '1px solid gray' }}>
                             <img src="./icons/search.svg" alt="search" />
                             <input type="text" style={{ border: "none" }} />
@@ -34,9 +26,4 @@ export default function Catelog() {
             < Footer />
         </>
     )
-}
-
-const search_style = {
-    float: 'right',
-    margin: "5vh 5vw"
 }

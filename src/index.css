@@ -8,15 +8,31 @@ input:focus {
     outline: none;
 }
 
+#catelog-table, #order-table {
+    max-height: 65vh;
+    display: block;
+    overflow-y: scroll;
+}
+
 /* Utility classes */
 
 .btn-vt {
     color: #5861ae;
+    background-color: white;
     border: 1px solid #5861ae;
-    border-radius: 4;
+    border-radius: 4px;
     margin: 0 2vw;
     padding: .2rem 2rem;
-    background: white;
+    cursor: pointer
+}
+
+.btn-vt-fill {
+    color: white;
+    background-color: #5861ae;
+    border: none;
+    border-radius: 4px;
+    margin: 0 2vw;
+    padding: .2rem 2rem;
     cursor: pointer
 }
 
@@ -60,4 +76,21 @@ thead>tr>th:last-child {
 
 tbody>tr:nth-child(2n+2) {
     background-color: #FAFAFA;
+}
+
+
+/* Summary CSS */
+
+#summary {
+    width: 60vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: white;
+    height: 100vh;
+    z-index: 100;
+}
+
+.blur {
+    filter: blur(2px);
 }
