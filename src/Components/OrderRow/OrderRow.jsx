@@ -1,12 +1,15 @@
 import React from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../authOperations";
+import AlertPopUp from "../AlertPopUp/AlertPopUp";
 import style from "./OrderRow.module.css";
 
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const OrderRow = ({ data }) => {
     const navigate = useNavigate();
+    const [alertPopUp, setAlertPopUp] = useState(false);
     data?.map(obj => {
         const date = new Date(obj.createdAt)
         return obj.createdAt = date.toLocaleString();
@@ -24,7 +27,7 @@ const OrderRow = ({ data }) => {
         })
         .then((response) => {
             if (response.status === 403 || response.status === 401) return navigate("/");
-                window.location.reload();
+                setAlertPopUp(true);
             });
     }
 
@@ -33,6 +36,8 @@ const OrderRow = ({ data }) => {
     }
 
     return (
+        <>
+        {alertPopUp ? <AlertPopUp /> : <></>}
         <table id="order-table" className={style.fontSize}>
             <thead>
                 <tr style={{ position: "sticky", top: 0 }}>
@@ -66,6 +71,7 @@ const OrderRow = ({ data }) => {
                 }
             </tbody>
         </table>
+        </>
     )
 }
 

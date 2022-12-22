@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AlertPopUp.css";
 import danger from "./danger.PNG";
 
@@ -8,6 +8,9 @@ export default function AlertPopUp() {
   const toggleModal = () => {
     setModal(!modal);
   };
+  useEffect(() => {
+    toggleModal();
+  }, [])
 
   if (modal) {
     document.body.classList.add("active-modal");
@@ -17,10 +20,6 @@ export default function AlertPopUp() {
 
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal">
-        Alert Confirm
-      </button>
-
       {modal && (
         <div className="modal1">
           <div onClick={toggleModal} className="overlay1"></div>
@@ -33,9 +32,10 @@ export default function AlertPopUp() {
                 Are you sure want to cancel the Order No:ORD1
               </p>
             </div>
-            <button className="alert_btn" onClick={toggleModal}>
+            <a href="/home"><button className="alert_btn" onClick={toggleModal}>
               Proceed
             </button>
+            </a>
           </div>
         </div>
       )}

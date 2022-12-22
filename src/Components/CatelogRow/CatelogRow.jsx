@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../../authOperations";
 import styles from "./summary.module.css";
 import PopModal from "../PopModal/PopModal";
-import AlertPopUp from "../AlertPopUp/AlertPopUp";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const CatelogRow = () => {
@@ -127,12 +126,6 @@ const CatelogRow = () => {
     if (arg === "proceed") {
       return setSummaryOn(true);
     }
-    const date = Date.now();
-    const order_id = `ORLA${date}`;
-    const storeLocation =
-      document.getElementById("storeLocation").value || "JP Nagar";
-    const storePhone =
-      document.getElementById("storePhone").value || 9988776655;
     let total_items = 0;
     let total_price = 0;
     for (let i = 0; i < totalCart.length; i++) {
