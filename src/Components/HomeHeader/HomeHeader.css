@@ -49,6 +49,28 @@
   color: #ffffff;
 }
 
-.invalid {
-  color: red;
+.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 63.9px;
+  font: normal normal normal 18px/19px Avenir;
+  color: #777;
+  border-left: 1px solid rgb(230, 228, 228);
+  cursor: pointer;
+  background-color: red;
+  color: #ffffff;
+  width: 2vw;
+  height: 5vh;
+  margin-top: 10vh;
+  margin-left: 88.4%;
+  transition: all 0.5s ease-out;
+}
+
+.home_pic {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  margin-right: 10px;
+  border-radius: 50%;
 }

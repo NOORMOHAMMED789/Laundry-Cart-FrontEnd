@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./SignupPage.css";
 import { useNavigate } from "react-router-dom";
+import { getToken, setToken } from "../../authOperations";
+const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const SignupPage = () => {
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
+  const [message, setMessage] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -14,7 +17,7 @@ const SignupPage = () => {
   // const data = useRef();
   const blurHandler = () => {
     setErrorMsg("");
-    setPassErrorMsg("");
+    setMessage("");
   };
 
   const emailChangeHandler = (e) => {
@@ -39,8 +42,39 @@ const SignupPage = () => {
     }
   };
 
-  const submitHandler = () => {
-    console.log(errorMsg, passErrorMsg);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const { email, password } = data;
+    fetch(`${URL}/api/v1/user/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "Failed") {
+          setMessage(data.message);
+        } else {
+          const token = data.token;
+          setToken("token", token);
+          if (token === getToken("token")) {
+            console.log(token);
+            console.log(data.name);
+            setToken("Username", data.name);
+            navigate("/home");
+          }
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setMessage("Server down. try after sometime !!");
+      });
   };
   return (
     <div className="container">
@@ -57,7 +91,7 @@ const SignupPage = () => {
         <form className="section2_form" onSubmit={submitHandler}>
           <div id="float-label">
             <input
-              type="email || number"
+              type="text"
               onBlur={blurHandler}
               onChange={emailChangeHandler}
               required
@@ -71,16 +105,16 @@ const SignupPage = () => {
               required
               onBlur={blurHandler}
               onChange={passChangeHandler}
+              name="password field"
             />
             <label htmlFor="email">Password</label>
-            <img
-              src="client\Laundry-Cart-FrontEnd\client\public\icons\padlock.svg"
-              alt=""
-            />
           </div>
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
-          <button className="section2_btn">Sign In</button>
+          <p className="invalid">{message}</p>
+          <button className="section2_btn" onClick={submitHandler}>
+            Sign In
+          </button>
         </form>
       </section>
     </div>
