@@ -123,8 +123,7 @@ const RegisterPage = () => {
     }
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const submitHandler = () => {
     const {
       Name,
       Email,
@@ -181,7 +180,7 @@ const RegisterPage = () => {
       </section>
       <section className="register-2">
         <h1 className="register2_title">REGISTER</h1>
-        <form className="register2_form" onSubmit={submitHandler}>
+        <form className="register2_form">
           <div className="float-label1">
             <input
               type="text"
@@ -262,15 +261,14 @@ const RegisterPage = () => {
             <label htmlFor="email">Pincode</label>
             <p className="error_msg">{pinErrorMsg}</p>
           </div>
-          <input type="checkbox" className="terms_conditions" id="terms" />
+        </form>
           <label htmlFor="terms" className="conditions">
-            I agree to Terms & Condition receiving marketing and promotional
+          <input type="checkbox" className="terms_conditions" id="terms" /> I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button className="section2_btn1" onClick={toggleModal}>
+          <button className="section2_btn1" onClick={() => {submitHandler(); toggleModal()}}>
             Register
           </button>
-        </form>
       </section>
     </div>
   );

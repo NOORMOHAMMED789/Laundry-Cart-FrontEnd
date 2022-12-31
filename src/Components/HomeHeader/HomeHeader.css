@@ -50,27 +50,37 @@
 }
 
 .logout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 63.9px;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 10vh;
   font: normal normal normal 18px/19px Avenir;
-  color: #777;
   border-left: 1px solid rgb(230, 228, 228);
   cursor: pointer;
   background-color: red;
   color: #ffffff;
-  width: 2vw;
-  height: 5vh;
-  margin-top: 10vh;
-  margin-left: 88.4%;
+  padding: .2rem 2rem;
   transition: all 0.5s ease-out;
 }
 
-.home_pic {
-  width: 40px;
-  height: 40px;
+.home_pic>img {
   overflow: hidden;
   margin-right: 10px;
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 400px) {
+  .header {
+    height: 5vh;
+  }
+  .nav_lists {
+    height: 5vh;
+  }
+  .home_pic>img{
+    width: 20px;
+    height: 20px;
+  }
+  .logout {
+    top: 5vh;
+  }
 }

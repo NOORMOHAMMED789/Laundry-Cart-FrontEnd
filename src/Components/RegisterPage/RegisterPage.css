@@ -6,7 +6,8 @@
 .register2_form {
   display: grid;
   grid-template-columns: 75% 75%;
-  width: 70%;
+  width: 60%;
+  padding: 0 3rem;
 }
 
 .float-label1 input {
@@ -49,21 +50,16 @@
 }
 
 .container1 {
-  display: grid;
-  grid-template-columns: 10% 80%;
+  display: flex;
 }
 
 .register_text {
-  margin-top: 129px;
-  margin-left: 69px;
-  width: 14px;
+  margin: 5% 5rem;
+  width: 30vw;
   height: 157px;
-  text-align: left;
   font: normal normal 500 62px/80px Avenir;
   letter-spacing: 2.2px;
   color: #5861ae;
-  text-transform: capitalize;
-  opacity: 1;
   font-size: 30px;
 }
 
@@ -72,40 +68,27 @@
   left: 72px;
   width: 175px;
   height: 59px;
-  text-align: left;
   font: normal normal normal 20px/32px Avenir;
   letter-spacing: 0.8px;
   color: #565657;
-  text-transform: capitalize;
-  opacity: 1;
   font-size: 15px;
 }
 
 .register-2 {
-  top: 81px;
-  margin-left: 362px;
-  width: 838px;
-  height: 596px;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
   background: #f8f9ff 0% 0% no-repeat padding-box;
-  opacity: 1;
 }
 
 .register2_title {
-  margin-top: 45px;
-  margin-left: 65px;
-  width: 157px;
-  height: 44px;
-  text-align: left;
+  padding-left: 3.5rem;
   font: normal normal medium 32px/60px Avenir;
   letter-spacing: 1.28px;
   color: #5861ae;
-  text-transform: uppercase;
-  opacity: 1;
 }
 
 .register2_form {
-  margin-top: 15px;
-  margin-left: 10px;
   color: #77838f;
   font-size: 14px;
 }
@@ -115,27 +98,12 @@
   margin-bottom: 8px;
 }
 
-.section2_forget {
-  margin-top: 55px;
-  margin-left: 16px;
-  width: 140px;
-  height: 22px;
-  text-align: left;
-  font: normal normal medium 16px/26px Avenir;
-  letter-spacing: 0.64px;
-  color: #4552c1;
-  text-transform: capitalize;
-  opacity: 1;
-}
-
 .section2_btn1 {
-  margin-top: 40px;
-  margin-left: 283px;
+  margin: 2vh auto;
   width: 150px;
   height: 50px;
   background: #4552c1 0% 0% no-repeat padding-box;
   border-radius: 4px;
-  opacity: 1;
   color: #fff;
   border-style: none;
 }
@@ -151,29 +119,14 @@
   font-size: 13px;
 }
 
-.terms_conditions {
-  margin-top: 30px;
-  margin-left: 135px;
-  width: 18px;
-  height: 18px;
-}
-
-.conditions {
-  margin-top: 32px;
-  margin-left: -272px;
-}
-
 .section1_para11 {
   margin-top: 52px;
   margin-left: 1px;
   width: 189px;
   height: 22px;
-  text-align: left;
   font: normal normal normal 16px/26px Avenir;
   letter-spacing: 0.64px;
   color: #565657;
-  text-transform: capitalize;
-  opacity: 1;
   font-size: 13px;
 }
 
@@ -183,8 +136,8 @@
   width: 150px;
   height: 50px;
   border: 2px solid #4552c1;
+  background-color: white;
   border-radius: 4px;
-  opacity: 1;
 }
 
 .error_msg {
@@ -198,4 +151,8 @@
   color: white;
   box-shadow: 2px 2px 10px gray;
   transform: scale(1.01);
+}
+
+.conditions {
+  margin: 2vh auto 0;
 }

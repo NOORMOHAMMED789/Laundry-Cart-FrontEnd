@@ -40,60 +40,48 @@
 }
 
 .container {
-  display: grid;
-  grid-template-columns: 25% 25%;
+  width: 100vw;
+  display: flex;
+}
+
+.section-1 {
+  width: 50vw;
+  padding-left: 10rem;
+  box-sizing: border-box;
 }
 
 .section1_title {
-  top: 110px;
-  margin-left: 152px;
   width: 411px;
   height: 170px;
-  text-align: left;
   font: normal normal 700 100px/120px Avenir;
   letter-spacing: 0px;
   color: #5861ae;
   text-transform: capitalize;
-  opacity: 1;
   font-size: 60px;
 }
 
 .section1_para {
-  top: 501px;
-  margin-left: 151px;
-  width: 335px;
-  height: 27px;
-  text-align: left;
   font: normal normal normal 20px/26px Avenir;
   letter-spacing: 0.8px;
   color: #565657;
   text-transform: capitalize;
-  opacity: 1;
   font-size: 14px;
 }
 
 .section1_para1 {
-  top: 602px;
-  margin-left: 152px;
-  width: 189px;
-  height: 22px;
-  text-align: left;
   font: normal normal normal 16px/26px Avenir;
   letter-spacing: 0.64px;
   color: #565657;
   text-transform: capitalize;
-  opacity: 1;
   font-size: 13px;
 }
 
 .section1_btn {
-  top: 640px;
-  margin-left: 152px;
   width: 150px;
   height: 50px;
   border: 2px solid #4552c1;
   border-radius: 4px;
-  opacity: 1;
+  background-color: white;
 }
 
 .section1_btn:hover {
@@ -104,13 +92,9 @@
 }
 
 .section-2 {
-  top: 45px;
-  margin-left: 330px;
-  width: 668px;
+  width: 50vw;
   height: 470px;
-  /* UI Properties */
   background: #b9c0fd1a 0% 0% no-repeat padding-box;
-  opacity: 1;
 }
 
 .section2_title {
@@ -119,12 +103,10 @@
   margin-left: 130px;
   width: 128px;
   height: 44px;
-  text-align: left;
   font: normal normal medium 32px/60px Avenir;
   letter-spacing: 1.28px;
   color: #4552c1;
   text-transform: uppercase;
-  opacity: 1;
 }
 
 .section2_form {
@@ -144,12 +126,10 @@
   margin-left: 276px;
   width: 140px;
   height: 22px;
-  text-align: left;
   font: normal normal medium 16px/26px Avenir;
   letter-spacing: 0.64px;
   color: #4552c1;
   text-transform: capitalize;
-  opacity: 1;
 }
 
 .section2_btn {
@@ -159,7 +139,6 @@
   height: 50px;
   background: #4552c1 0% 0% no-repeat padding-box;
   border-radius: 4px;
-  opacity: 1;
   color: #fff;
   border-style: none;
 }

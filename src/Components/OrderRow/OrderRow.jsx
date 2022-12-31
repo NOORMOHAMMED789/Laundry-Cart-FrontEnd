@@ -42,7 +42,7 @@ const OrderRow = ({ data }) => {
             <thead>
                 <tr style={{ position: "sticky", top: 0 }}>
                     <th className={style.cell}>Order Id</th>
-                    <th className={style.cell}>Order Date and Time</th>
+                    <th className={style.cell}>Order Date</th>
                     <th className={style.cell}>Store Location</th>
                     <th className={style.cell}>City</th>
                     <th className={style.cell}>Store Phone</th>
