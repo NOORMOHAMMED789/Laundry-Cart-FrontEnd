@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Avenir';
+    src: url(../public/AvenirLTStd-Black.otf);
+}
+
+@font-face {
+    font-family: "Open Sans";
+    src: url(../public/OpenSans-Regular.ttf);
+}
+
 body {
     margin: 0;
     padding: 0;
