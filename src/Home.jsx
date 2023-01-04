@@ -31,7 +31,7 @@ export default function Home() {
         setFetchedData(data.orders.reverse());
         console.log(data);
       });
-  }, []);
+  }, [navigate]);
 
   const handleCreateClick = () => {
     navigate("/catelog");
@@ -46,7 +46,7 @@ export default function Home() {
         style={{ height: "85vh", marginLeft: "4vw" }}
       >
         <div className="home-container-hero" style={{ height: "10vh" }}>
-          <div htmlFor="order-count" style={count_style}>
+          <div id="order-count" style={count_style}>
             Orders | {fetchedData?.length}
           </div>
           <div style={search_style}>
