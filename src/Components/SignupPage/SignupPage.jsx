@@ -24,7 +24,7 @@ const SignupPage = () => {
     setData({ ...data, email: e.target.value });
     if (
       !e.target.value.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
     ) {
       setErrorMsg("please enter a valid Email");
@@ -44,7 +44,8 @@ const SignupPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const { email, password } = data;
+    let { email, password } = data;
+    email = email.toLowerCase();
     fetch(`${URL}/api/v1/user/login`, {
       method: "POST",
       body: JSON.stringify({
@@ -96,7 +97,7 @@ const SignupPage = () => {
               onChange={emailChangeHandler}
               required
             />
-            <label htmlFor="email">Mobile/Email</label>
+            <label htmlFor="email">Email</label>
             <p className="section2_error_message">{errorMsg}</p>
           </div>
           <div id="float-label">
@@ -110,7 +111,7 @@ const SignupPage = () => {
             <label htmlFor="email">Password</label>
           </div>
           <p className="section2_error_message">{passErrorMsg}</p>
-          <p className="section2_forget">forget password ?</p>
+          <p className="section2_forget">Forget password ?</p>
           <p className="invalid">{message}</p>
           <button className="section2_btn" onClick={submitHandler}>
             Sign In

@@ -13,21 +13,22 @@ const RegisterPage = () => {
   const [addressErrorMsg, setAddressErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [pinErrorMsg, setPinErrorMsg] = useState("");
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
+  const [btnBool, setBtnBool] = useState(true);
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    state: "",
-    district: "",
-    address: "",
-    pincode: "",
-    password: "",
+    Name: "",
+    Email: "",
+    PhoneNumber: "",
+    State: "",
+    District: "",
+    Address: "",
+    Pincode: "",
+    Password: "",
   });
 
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+  // const toggleModal = () => {
+  //   setModal(!modal);
+  // };
 
   //! Handles the blur event when you out focus it.
   const blurHandler = () => {
@@ -54,7 +55,7 @@ const RegisterPage = () => {
     setUserData({ ...userData, Email: e.target.value });
     if (
       !e.target.value.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       )
     ) {
       setEmailErrorMsg("please enter a valid Email");
@@ -115,26 +116,26 @@ const RegisterPage = () => {
 
   //! Handles the pincode field error message
   const pinChangeHandler = (e) => {
-    setUserData({ ...userData, pincode: e.target.value });
+    setUserData({ ...userData, Pincode: e.target.value });
     if (e.target.value.length > 6) {
-      setPinErrorMsg("Must contains 6 digits");
+      setPinErrorMsg("Must contains 7 digits");
     } else {
       setPinErrorMsg("");
     }
   };
 
   const submitHandler = () => {
-    const {
+    let {
       Name,
       Email,
       PhoneNumber,
       State,
       District,
       Address,
-      pincode,
+      Pincode,
       Password,
     } = userData;
-
+    Email = Email?.toLowerCase();
     fetch(`${URL}/api/v1/user/register`, {
       method: "POST",
       body: JSON.stringify({
@@ -144,7 +145,7 @@ const RegisterPage = () => {
         state: State,
         district: District,
         address: Address,
-        pincode: pincode,
+        pincode: Pincode,
         password: Password,
       }),
       headers: {
@@ -155,17 +156,24 @@ const RegisterPage = () => {
       .then((data) => {
         console.log(data);
         if (data.message === "Account already exists") {
-          setModal(!modal);
-          // alert("User Already Exists.Please, Login !!!");
-          navigate("/", { replace: true });
-        } else {
+          // setModal(!modal);
+          alert("User Already Exists.Please, Login !!!");
+        } else if (data.status === "Success") {
           alert("Registration Successful");
+        } else {
+          alert ("Unable to create Account");
+          console.log(data.message);
         }
+        navigate("/");
       })
       .catch((e) => {
         alert(e.message);
       });
   };
+
+  const buttonToggle = () => {
+    setBtnBool(!btnBool);
+  }
 
   return (
     <div className="container1">
@@ -263,10 +271,10 @@ const RegisterPage = () => {
           </div>
         </form>
           <label htmlFor="terms" className="conditions">
-          <input type="checkbox" className="terms_conditions" id="terms" /> I agree to Terms & Condition receiving marketing and promotional
+          <input type="checkbox" className="terms_conditions" onClick={buttonToggle} id="terms" /> I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button className="section2_btn1" onClick={() => {submitHandler(); toggleModal()}}>
+          <button disabled={btnBool} className="section2_btn1" id="submit" onClick={() => {submitHandler()}}>
             Register
           </button>
       </section>

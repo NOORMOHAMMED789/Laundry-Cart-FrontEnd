@@ -18,7 +18,8 @@ input:focus {
     outline: none;
 }
 
-#catelog-table, #order-table {
+#catelog-table,
+#order-table {
     max-height: 65vh;
     display: block;
     overflow-y: scroll;
@@ -88,6 +89,14 @@ tbody>tr:nth-child(2n+2) {
     background-color: #FAFAFA;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:visited {
+    background-color: black;
+}
 
 /* Summary CSS */
 
@@ -103,4 +112,47 @@ tbody>tr:nth-child(2n+2) {
 
 .blur {
     filter: blur(2px);
+}
+
+/* Media query for mobile device */
+@media only screen and (max-width: 500px) {
+    .header {
+        height: 5vh;
+    }
+
+    .header_title {
+        display: none;
+    }
+
+    .nav_lists {
+        height: 5vh;
+    }
+
+    .home_pic>img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .side-bar {
+        float: none;
+        width: 100vw;
+        height: 30px;
+        flex-direction: row;
+        padding-top: 5px;
+
+    }
+    .option {
+        height: 10vh;
+    }
+
+    #order-count {
+        margin-top: 5vh;
+    }
+
+    .logout {
+        top: 5vh;
+    }
+    .footer2 {
+        grid-template-columns: repeat(2, 50vw);
+    }
 }
