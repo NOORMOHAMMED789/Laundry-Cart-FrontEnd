@@ -7,7 +7,7 @@ const Sidebar = () => {
     return (
         <div className='side-bar'>
             <div className='icon-block' >
-                <div id='home' className='option' />
+                <div id='home' className='option' onClick={() => navigate("/")}/>
             </div>
             <div className='icon-block' onClick={() => navigate("/catelog")}>
                 <div id='more' className='option'/>
