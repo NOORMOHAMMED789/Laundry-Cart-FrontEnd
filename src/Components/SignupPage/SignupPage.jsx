@@ -17,6 +17,7 @@ const SignupPage = () => {
   // const data = useRef();
   const blurHandler = () => {
     setErrorMsg("");
+    setPassErrorMsg("");
     setMessage("");
   };
 
@@ -35,8 +36,8 @@ const SignupPage = () => {
 
   const passChangeHandler = (e) => {
     setData({ ...data, password: e.target.value });
-    if (e.target.value.match(/[^a-zA-Z0-9]/) || e.target.value.length < 6) {
-      setPassErrorMsg("Must be atleast 6 characters");
+    if (!e.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+      setPassErrorMsg("At least 8 characters , 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character consider as strong password");
     } else {
       setPassErrorMsg("");
     }

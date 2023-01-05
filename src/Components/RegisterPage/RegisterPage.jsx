@@ -107,10 +107,12 @@ const RegisterPage = () => {
   //! Handles the password field error message
   const passChangeHandler = (e) => {
     setUserData({ ...userData, Password: e.target.value });
-    if (e.target.value.match(/[^a-zA-Z0-9]/) || e.target.value.length < 6) {
-      setPassErrorMsg("Must be atleast 6 characters");
+    if (e.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+      setPassErrorMsg("Strong Password");
+    } else if (e.target.value.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)) {
+      setPassErrorMsg("Medium Password")
     } else {
-      setPassErrorMsg("");
+      setPassErrorMsg("Weak Password");
     }
   };
 
@@ -161,7 +163,7 @@ const RegisterPage = () => {
         } else if (data.status === "Success") {
           alert("Registration Successful");
         } else {
-          alert ("Unable to create Account");
+          alert("Unable to create Account");
           console.log(data.message);
         }
         navigate("/");
@@ -270,13 +272,13 @@ const RegisterPage = () => {
             <p className="error_msg">{pinErrorMsg}</p>
           </div>
         </form>
-          <label htmlFor="terms" className="conditions">
+        <label htmlFor="terms" className="conditions">
           <input type="checkbox" className="terms_conditions" onClick={buttonToggle} id="terms" /> I agree to Terms & Condition receiving marketing and promotional
-            materials
-          </label>
-          <button disabled={btnBool} className="section2_btn1" id="submit" onClick={() => {submitHandler()}}>
-            Register
-          </button>
+          materials
+        </label>
+        <button disabled={btnBool} className="section2_btn1" id="submit" onClick={() => { submitHandler() }}>
+          Register
+        </button>
       </section>
     </div>
   );
