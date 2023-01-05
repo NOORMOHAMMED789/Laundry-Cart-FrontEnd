@@ -247,7 +247,7 @@ const CatelogRow = () => {
             <li className={styles.total_block} style={{background: "#5861AE", color: "white", width: "35vw", textAlign: "right"}}>Total: <span style={{fontSize: "1.8rem"}}>{parseInt(handleSubmit("total")) + 90}</span></li>
             <li className={styles.address}>Address
               <div className={styles.homeAddress}>
-                <div><img src="/icons/tick.svg" style={{float: "right"}}/></div>
+                <div><img src="/icons/tick.svg" style={{float: "right"}} alt="tick"/></div>
                 <div style={{fontWeight: "bold"}}>Home</div>
                 <div style={{color: "#777"}}>#223, 10th road, JP Nagar, Bangalore</div>
               </div>
