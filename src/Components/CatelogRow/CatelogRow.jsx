@@ -264,7 +264,7 @@ const CatelogRow = () => {
         <></>
       )}
       <table id="catelog-table" className={summaryOn ? "blur" : ""}>
-        <thead style={{ position: "sticky", top: 0, zIndex: -101 }}>
+        <thead style={{ position: "sticky", top: 0 }}>
           <tr>
             <th style={{ padding: "0 .5rem", width: "25vw" }}>Product Types</th>
             <th style={{ width: 10 }}>Quantity</th>
@@ -275,7 +275,7 @@ const CatelogRow = () => {
         </thead>
 
         {/* List Rendering based on number of products */}
-        <tbody style={{ position: "relative" ,zIndex: -102}}>
+        <tbody >
           {rowData ? (
             rowData.map((obj) => (
               <tr key={obj.id}>
