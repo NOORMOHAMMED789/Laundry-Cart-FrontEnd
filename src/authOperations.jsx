@@ -16,5 +16,4 @@ function removeToken(name) {
     localStorage.removeItem(name);
   }
 }
-
 export { getToken, setToken, removeToken };
