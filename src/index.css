@@ -1,158 +1,249 @@
-@font-face {
-    font-family: 'Avenir';
-    src: url(../public/AvenirLTStd-Black.otf);
+:root {
+  --paddingLeft: 6rem;
+  --paddingRight: 6rem;
+  --paddingLeftMedium: 5rem;
+  --paddingRightMedium: 5rem;
+  --paddingLeftTablet: 4rem;
+  --paddingRightTablet: 4rem;
+  --paddingLeftMobile: 2.4rem;
+  --paddingRightMobile: 2.4rem;
 }
-
-@font-face {
-    font-family: "Open Sans";
-    src: url(../public/OpenSans-Regular.ttf);
+* {
+  box-sizing: border-box;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
+html,
+body,
+span,
+applet,
+object,
+iframe,
+li,
+h1,
+h2,
+h4,
+h3,
+h5,
+h6,
+blockquote,
+pre,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+p,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+html {
+  font-size: 62.5%;
+}
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  width: 100%;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-family: "Lato", sans-serif;
 }
-
+li {
+  list-style: none;
+}
+@font-face {
+  font-family: "Avenir";
+  src: url(../public/AvenirLTStd-Black.otf);
+}
+@font-face {
+  font-family: "Open Sans";
+  src: url(../public/OpenSans-Regular.ttf);
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 input:focus {
-    outline: none;
+  outline: none;
 }
-
 #catelog-table,
 #order-table {
-    max-height: 65vh;
-    display: block;
-    overflow-y: scroll;
+  max-height: 65vh;
+  display: block;
+  overflow-y: scroll;
 }
-
 /* Utility classes */
-
 .btn-vt {
-    color: #5861ae;
-    background-color: white;
-    border: 1px solid #5861ae;
-    border-radius: 4px;
-    margin: 0 2vw;
-    padding: .2rem 2rem;
-    cursor: pointer
+  color: #5861ae;
+  background-color: white;
+  border: 1px solid #5861ae;
+  border-radius: 4px;
+  margin: 0 2vw;
+  padding: 0.2rem 2rem;
+  cursor: pointer;
 }
-
 .btn-vt-fill {
-    color: white;
-    background-color: #5861ae;
-    border: none;
-    border-radius: 4px;
-    margin: 0 2vw;
-    padding: .2rem 2rem;
-    cursor: pointer
+  color: white;
+  background-color: #5861ae;
+  border: none;
+  border-radius: 4px;
+  margin: 0 2vw;
+  padding: 0.2rem 2rem;
+  cursor: pointer;
 }
-
 .pad {
-    padding: 0 2rem;
+  padding: 0 2rem;
 }
-
 /* Default Styling of Application */
-
 th {
-    background-color: #383737;
-    color: white;
-    font: normal normal 600 12px/48px Open Sans;
+  background-color: #383737;
+  color: white;
+  font: normal normal 600 12px/48px Open Sans;
 }
-
 table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
-
 td {
-    text-align: center;
-    border: 1px solid #EAEDF0;
+  text-align: center;
+  border: 1px solid #eaedf0;
 }
-
 #order-table tr {
-    height: 4vh;
+  height: 4vh;
 }
-
 #catelog-table tr {
-    height: 8vh;
+  height: 8vh;
 }
-
-thead>tr>th:first-child {
-    border-radius: .5rem 0 0 0;
+thead > tr > th:first-child {
+  border-radius: 0.5rem 0 0 0;
 }
-
-thead>tr>th:last-child {
-    border-radius: 0 .5rem 0 0;
+thead > tr > th:last-child {
+  border-radius: 0 0.5rem 0 0;
 }
-
-tbody>tr:nth-child(2n+2) {
-    background-color: #FAFAFA;
+tbody > tr:nth-child(2n + 2) {
+  background-color: #fafafa;
 }
-
 a {
-    text-decoration: none;
-    color: black;
+  text-decoration: none;
+  color: black;
 }
-
 a:visited {
-    background-color: black;
+  background-color: black;
 }
-
 /* Summary CSS */
-
 #summary {
-    width: 60vw;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-color: white;
-    height: 100vh;
-    z-index: 100;
+  width: 60vw;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  height: 100vh;
+  z-index: 100;
 }
-
+.cursorPointer {
+  cursor: pointer;
+}
+.font19 {
+  font: normal normal normal 14px/19px Avenir;
+}
+.font27 {
+  font: normal normal 900 20px/27px Avenir;
+}
 .blur {
-    filter: blur(2px);
+  filter: blur(2px);
 }
-
-/* Media query for mobile device */
-@media only screen and (max-width: 500px) {
-    .header {
-        height: 5vh;
-    }
-
-    .header_title {
-        display: none;
-    }
-
-    .nav_lists {
-        height: 5vh;
-    }
-
-    .home_pic>img {
-        width: 20px;
-        height: 20px;
-    }
-
-    .side-bar {
-        float: none;
-        width: 100vw;
-        height: 30px;
-        flex-direction: row;
-        padding-top: 5px;
-
-    }
-    .option {
-        height: 10vh;
-    }
-
-    #order-count {
-        margin-top: 5vh;
-    }
-
-    .logout {
-        top: 5vh;
-    }
-    .footer2 {
-        grid-template-columns: repeat(2, 50vw);
-    }
+.stdP {
+  padding-left: var(--paddingLeft);
+  padding-right: var(--paddingRight);
+}
+@media (max-width: 1280px) {
+  .stdP {
+    padding-left: var(--paddingLeftMedium);
+    padding-right: var(--paddingRightMedium);
+  }
+}
+@media (max-width: 1100px) {
+  .stdP {
+    padding-left: var(--paddingLeftTablet);
+    padding-right: var(--paddingRightTablet);
+  }
+}
+@media (max-width: 720px) {
+  .stdP {
+    padding-left: var(--paddingLeftMobile);
+    padding-right: var(--paddingRightMobile);
+  }
 }
