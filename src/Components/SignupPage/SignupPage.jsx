@@ -36,8 +36,14 @@ const SignupPage = () => {
 
   const passChangeHandler = (e) => {
     setData({ ...data, password: e.target.value });
-    if (!e.target.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
-      setPassErrorMsg("At least 8 characters , 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character consider as strong password");
+    if (
+      !e.target.value.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+      )
+    ) {
+      setPassErrorMsg(
+        "At least 8 characters , 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character consider as strong password"
+      );
     } else {
       setPassErrorMsg("");
     }
@@ -79,7 +85,7 @@ const SignupPage = () => {
       });
   };
   return (
-    <div className="container">
+    <div className="container stdP">
       <section className="section-1">
         <h1 className="section1_title">Laundry Service</h1>
         <h4 className="section1_para">Doorstep Wash & Dryclean Service</h4>
