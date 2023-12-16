@@ -33,6 +33,7 @@
   transition: all 0.2s ease-out;
 }
 #float-label:focus-within label {
+  margin-top: -0.5rem;
   transform: translate(0, 12px) scale(0.75);
 }
 .container {
@@ -40,6 +41,7 @@
   margin-top: 1rem;
   display: flex;
   flex-direction: row;
+  margin-bottom: 4.8rem;
 }
 .container section {
   width: 50%;
@@ -75,17 +77,10 @@
   margin-bottom: 1rem;
 }
 .section1_btn {
-  margin-bottom: 2rem;
   border: 2px solid #4552c1;
   border-radius: 4px;
   background-color: white;
   padding: 1.6rem 4rem;
-  font-family: Avenir;
-  font-size: 1.6rem;
-  font-style: normal;
-  font-weight: 100;
-  line-height: 0.8rem;
-  color: #565657;
 }
 .section1_btn:hover,
 .section1_btn:active {
@@ -102,46 +97,37 @@
 .section-2 {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  background: #b9c0fd1a 0% 0% no-repeat padding-box;
+  padding: 0 1.6rem 2.4rem 1.6rem;
+  background: #8b93d81a 0% 0% no-repeat padding-box;
 }
 
 .section2_title {
   color: #4552c1;
-  margin-left: 130px;
-  font: normal normal 32px/60px Avenir;
-  letter-spacing: 1.28px;
+  font: normal normal 2.4rem/60px Avenir;
+  letter-spacing: 0.18px;
   color: #4552c1;
 }
 
 .section2_form {
-  margin: 0 15%;
   color: #77838f;
   font-size: 14px;
 }
 
 #float-label {
   font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: 2.4rem;
 }
-
 .section2_forget {
   font: normal normal 12px/26px Avenir;
   letter-spacing: 0.64px;
   color: #4552c1;
-  text-align: right;
-  margin-right: 3rem;
 }
-
 .section2_btn {
-  width: 150px;
-  height: 50px;
+  padding: 1.6rem 4rem;
   background: #4552c1 0% 0% no-repeat padding-box;
   border-radius: 4px;
   color: #fff;
   border-style: none;
-  margin-bottom: 20px;
 }
 .section2_btn:hover {
   color: white;
@@ -151,6 +137,8 @@
 
 .section2_error_message {
   color: red;
+  position: absolute;
+  top: 100%;
   font-size: 13px;
 }
 
