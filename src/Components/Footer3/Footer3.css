@@ -1,14 +1,13 @@
 .footer3 {
-  width: 100%;
-  height: 5vh;
   background: #182838 0% 0% no-repeat padding-box;
   border: 1px solid #707070;
   color: #182838;
 }
 
 .footer3_message {
+  font-size: 1.8rem;
+  line-height: 2.2rem;
   display: flex;
   justify-content: center;
-  margin: 10px auto;
   color: white;
 }

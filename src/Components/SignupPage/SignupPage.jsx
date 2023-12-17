@@ -116,8 +116,8 @@ const SignupPage = () => {
               name="password field"
             />
             <label htmlFor="email">Password</label>
+            <p className="section2_error_message">{passErrorMsg}</p>
           </div>
-          <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">Forget password ?</p>
           <p className="invalid">{message}</p>
           <button className="section2_btn" onClick={submitHandler}>
